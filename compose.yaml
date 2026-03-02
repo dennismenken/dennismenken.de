@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    volumes:
+      - ./content:/app/content:ro
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
