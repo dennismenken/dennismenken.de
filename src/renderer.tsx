@@ -41,6 +41,23 @@ async function getCssUrlsAsync(): Promise<string[]> {
   return [...new Set(urls)];
 }
 
+let inlineCssCache: string | null = null;
+
+async function getInlineCssAsync(): Promise<string | null> {
+  if (isDev) return null;
+  if (inlineCssCache) return inlineCssCache;
+  const m = await getManifestAsync();
+  const files: string[] = [];
+  for (const entry of Object.values(m)) {
+    if (entry.file?.endsWith(".css")) files.push(entry.file);
+    if (entry.css) files.push(...entry.css);
+  }
+  const unique = [...new Set(files)];
+  const contents = await Promise.all(unique.map((f) => Bun.file(`dist/client/${f}`).text()));
+  inlineCssCache = contents.join("\n");
+  return inlineCssCache;
+}
+
 function escapeHtml(str: string): string {
   return str
     .replace(/&/g, "&amp;")
@@ -53,6 +70,7 @@ interface RenderOptions {
   page: ReactElement;
   title?: string;
   description?: string;
+  canonicalPath?: string;
   includeClientScript?: boolean;
   noIndex?: boolean;
   jsonLd?: Record<string, unknown>;
@@ -62,12 +80,14 @@ export async function renderPage({
   page,
   title = "Dennis Menken",
   description = "End-to-End Solutions Architect",
+  canonicalPath,
   includeClientScript = false,
   noIndex = false,
   jsonLd,
 }: RenderOptions): Promise<string> {
   const html = renderToString(page);
-  const cssUrls = await getCssUrlsAsync();
+  const inlineCss = await getInlineCssAsync();
+  const cssUrls = inlineCss ? [] : await getCssUrlsAsync();
 
   let clientScriptTag = "";
   if (includeClientScript) {
@@ -85,6 +105,11 @@ export async function renderPage({
     ? `\n    <script>window.$RefreshReg$ = () => {};window.$RefreshSig$ = () => (type) => type;</script>\n    <script type="module" src="/@vite/client"></script>`
     : "";
 
+  const canonicalTag =
+    canonicalPath != null
+      ? `\n    <link rel="canonical" href="https://dennismenken.de${canonicalPath}" />`
+      : "";
+
   const robotsMeta = noIndex ? '\n    <meta name="robots" content="noindex, nofollow" />' : "";
 
   const jsonLdTag = jsonLd
@@ -97,13 +122,14 @@ export async function renderPage({
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${escapeHtml(title)}</title>
-    <meta name="description" content="${escapeHtml(description)}" />${robotsMeta}
+    <meta name="description" content="${escapeHtml(description)}" />${canonicalTag}${robotsMeta}
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/SpaceGrotesk-Variable.woff2" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    ${cssUrls.map((url) => `<link rel="stylesheet" href="${url}" />`).join("\n    ")}
+    ${inlineCss ? `<style>${inlineCss}</style>` : cssUrls.map((url) => `<link rel="stylesheet" href="${url}" />`).join("\n    ")}
     <link rel="alternate" type="application/atom+xml" title="Dennis Menken - Log" href="/log/feed.xml" />${jsonLdTag}${viteClient}${clientScriptTag}
   </head>
   <body>
-    <div id="root">${html}</div>
+    <main id="root">${html}</main>
   </body>
 </html>`;
 }

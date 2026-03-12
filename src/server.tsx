@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
+import { compress } from "hono/compress";
 import { secureHeaders } from "hono/secure-headers";
 import { getAllPosts } from "./blog";
 import { generateFeed } from "./feed";
@@ -15,13 +16,32 @@ const app = new Hono();
 
 const isDev = process.env.NODE_ENV !== "production";
 
-// Static files
+// Static files (before compression so binary assets skip it)
 if (!isDev) {
+  app.use("/assets/*", async (c, next) => {
+    await next();
+    c.header("Cache-Control", "public, max-age=31536000, immutable");
+  });
   app.use("/assets/*", serveStatic({ root: "dist/client" }));
 }
+app.use("/fonts/*", async (c, next) => {
+  await next();
+  c.header("Cache-Control", "public, max-age=31536000, immutable");
+});
 app.use("/fonts/*", serveStatic({ root: "public" }));
+app.use("/favicon.svg", async (c, next) => {
+  await next();
+  c.header("Cache-Control", "public, max-age=86400");
+});
 app.use("/favicon.svg", serveStatic({ root: "public" }));
+app.use("/robots.txt", async (c, next) => {
+  await next();
+  c.header("Cache-Control", "public, max-age=86400");
+});
 app.use("/robots.txt", serveStatic({ root: "public" }));
+
+// Compression (after static files so only dynamic responses are compressed)
+app.use(compress());
 
 // Security headers
 app.use(secureHeaders());
@@ -36,6 +56,7 @@ app.get("/", async (c) => {
     title: "Dennis Menken | End-to-End Solutions Architect",
     description:
       "Das Bindeglied zwischen Mensch und Maschine. Ich übersetze die Bedürfnisse von Kunden und deren Nutzern in greifbare technologische Architektur.",
+    canonicalPath: "/",
     includeClientScript: true,
   });
   return c.html(html);
@@ -66,6 +87,7 @@ app.get("/log", async (c) => {
     title: "Logbuch von Dennis Menken",
     description:
       "Persönliches Logbuch eines End to End Solutions Architects. Gedanken über Systemarchitektur, Problemlösung und die Brücke zwischen Business und Technik.",
+    canonicalPath: "/log",
   });
   return c.html(html);
 });
@@ -132,6 +154,7 @@ app.get("/log/:slug", async (c) => {
     page: <LogEntry post={post} newer={newer} older={older} />,
     title: `${post.title} - Dennis Menken`,
     description: post.description,
+    canonicalPath: `/log/${post.slug}`,
     jsonLd,
   });
   return c.html(html);
