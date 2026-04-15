@@ -1,11 +1,11 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
-import * as THREE from "three";
+import { BufferAttribute, BufferGeometry, type Mesh, type Points } from "three";
 
 const PARTICLE_COUNT = 1500;
 
 function Particles() {
-  const meshRef = useRef<THREE.Points>(null);
+  const meshRef = useRef<Points>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const { viewport } = useThree();
 
@@ -20,14 +20,14 @@ function Particles() {
   }, []);
 
   const geometry = useMemo(() => {
-    const geo = new THREE.BufferGeometry();
+    const geo = new BufferGeometry();
     const pos = new Float32Array(PARTICLE_COUNT * 3);
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       pos[i * 3] = (Math.random() - 0.5) * 20;
       pos[i * 3 + 1] = (Math.random() - 0.5) * 20;
       pos[i * 3 + 2] = (Math.random() - 0.5) * 10;
     }
-    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    geo.setAttribute("position", new BufferAttribute(pos, 3));
     return geo;
   }, []);
 
@@ -42,7 +42,7 @@ function Particles() {
 
   useFrame((_, delta) => {
     if (!meshRef.current) return;
-    const posAttr = meshRef.current.geometry.attributes.position as THREE.BufferAttribute;
+    const posAttr = meshRef.current.geometry.attributes.position as BufferAttribute;
     const arr = posAttr.array as Float32Array;
 
     const mx = mouseRef.current.x * viewport.width * 0.5;
@@ -90,7 +90,7 @@ function Particles() {
 }
 
 function WireframeSphere() {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const meshRef = useRef<Mesh>(null);
 
   useFrame((_, delta) => {
     if (!meshRef.current) return;

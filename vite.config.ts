@@ -1,5 +1,5 @@
 import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -7,10 +7,18 @@ export default defineConfig({
   build: {
     outDir: "dist/client",
     manifest: true,
-    rollupOptions: {
+    rolldownOptions: {
       input: {
         client: "src/client.tsx",
         styles: "src/styles/index.css",
+      },
+      output: {
+        codeSplitting: {
+          groups: [
+            { name: "three-vendor", test: /[\\/]node_modules[\\/]three[\\/]/ },
+            { name: "r3f-vendor", test: /[\\/]node_modules[\\/]@react-three[\\/]/ },
+          ],
+        },
       },
     },
   },

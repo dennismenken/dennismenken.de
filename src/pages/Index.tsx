@@ -1,19 +1,21 @@
-import { BookOpen, Github, Linkedin } from "lucide-react";
+import { BookOpen } from "lucide-react";
+import GithubIcon from "../components/GithubIcon";
+import LinkedinIcon from "../components/LinkedinIcon";
 import XingIcon from "../components/XingIcon";
 
 const socialLinks = [
   {
-    icon: Github,
+    icon: GithubIcon,
     href: "https://github.com/dennismenken",
     label: "GitHub",
   },
   {
-    icon: Linkedin,
+    icon: LinkedinIcon,
     href: "https://www.linkedin.com/in/dennismenken/",
     label: "LinkedIn",
   },
   {
-    icon: "xing" as const,
+    icon: XingIcon,
     href: "https://www.xing.com/profile/Dennis_Menken",
     label: "Xing",
   },
@@ -49,11 +51,7 @@ export default function Index() {
           {socialLinks.map((link) => {
             const content = (
               <div className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-border bg-secondary/30 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:border-primary/50 hover:bg-primary/10 hover:shadow-[0_0_20px_hsl(170_60%_50%/0.15)]">
-                {link.icon === "xing" ? (
-                  <XingIcon className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
-                ) : (
-                  <link.icon className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
-                )}
+                <link.icon className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
                 <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 font-mono text-base text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
                   {link.label}
                 </span>
