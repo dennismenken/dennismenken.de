@@ -1,5 +1,5 @@
 ---
-date: 2026-03-02
+date: "2026-03-02T08:00:00+01:00"
 description: Warum mich Vibe Coding nicht in Panik versetzt und weshalb ich mich noch nie als reinen Softwareentwickler verstanden habe, sondern als Problemlöser.
 ---
 

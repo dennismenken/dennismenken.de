@@ -1,5 +1,5 @@
 ---
-date: 2026-03-03
+date: "2026-03-03T08:00:00+01:00"
 description: Wie mein Mobilfunkanbieter in 42 Minuten mein Kundenkonto zerlegt und welche architektonischen Lektionen dieses Systemversagen offenbart.
 ---
 

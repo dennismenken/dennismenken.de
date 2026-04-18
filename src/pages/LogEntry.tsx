@@ -21,9 +21,9 @@ export default function LogEntry({ post, newer, older }: LogEntryProps) {
 
         <article>
           <div className="font-mono text-base text-muted-foreground">
-            {Math.floor(new Date(`${post.date}T00:00:00Z`).getTime() / 1000)}
+            {Math.floor(new Date(post.datetime).getTime() / 1000)}
             {" | "}
-            <time>{post.date}</time>
+            <time dateTime={post.datetime}>{post.date}</time>
             {" UTC"}
           </div>
           <div

@@ -12,7 +12,7 @@ function escapeXml(str: string): string {
 }
 
 export function generateFeed(posts: BlogPost[]): string {
-  const updated = posts.length > 0 ? `${posts[0].date}T00:00:00Z` : new Date().toISOString();
+  const updated = posts.length > 0 ? posts[0].datetime : new Date().toISOString();
 
   const entries = posts
     .map(
@@ -20,7 +20,7 @@ export function generateFeed(posts: BlogPost[]): string {
     <title>${escapeXml(post.title)}</title>
     <link href="${SITE_URL}/log/${post.slug}" rel="alternate" />
     <id>${SITE_URL}/log/${post.slug}</id>
-    <updated>${post.date}T00:00:00Z</updated>
+    <updated>${post.datetime}</updated>
     <summary>${escapeXml(post.description ?? "")}</summary>
     <content type="html">${escapeXml(post.html)}</content>
   </entry>`,

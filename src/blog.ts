@@ -14,6 +14,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   date: string;
+  datetime: string;
   description?: string;
   html: string;
 }
@@ -56,15 +57,16 @@ async function parsePost(slug: string, content: string): Promise<BlogPost> {
     description = description.slice(0, 160);
   }
 
+  const rawDate =
+    data.date instanceof Date ? data.date.toISOString() : data.date ? String(data.date) : "";
+  const datetime = rawDate.includes("T") ? rawDate : rawDate ? `${rawDate}T00:00:00Z` : "";
+  const date = rawDate.split("T")[0] ?? "";
+
   return {
     slug,
     title,
-    date:
-      data.date instanceof Date
-        ? data.date.toISOString().split("T")[0]
-        : data.date
-          ? String(data.date).split("T")[0]
-          : "",
+    date,
+    datetime,
     description,
     html,
   };
@@ -92,7 +94,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
     posts.push(post);
   }
 
-  posts.sort((a, b) => (a.date > b.date ? -1 : 1));
+  posts.sort((a, b) => (a.datetime > b.datetime ? -1 : 1));
 
   if (!isDev) cachedPosts = posts;
   return posts;

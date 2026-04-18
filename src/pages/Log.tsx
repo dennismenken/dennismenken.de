@@ -29,7 +29,12 @@ export default function Log({ posts }: LogProps) {
                   href={`/log/${post.slug}`}
                   className="group block rounded-lg border border-border bg-card/50 p-5 transition-all duration-200 hover:border-primary/30 hover:bg-card"
                 >
-                  <time className="font-mono text-base text-muted-foreground">{post.date}</time>
+                  <time
+                    dateTime={post.datetime}
+                    className="font-mono text-base text-muted-foreground"
+                  >
+                    {post.date}
+                  </time>
                   <h2 className="mt-1 font-semibold text-foreground text-lg transition-colors group-hover:text-primary">
                     {post.title}
                   </h2>

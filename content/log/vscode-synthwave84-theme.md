@@ -1,5 +1,5 @@
 ---
-date: 2026-03-12
+date: "2026-03-12T08:00:00+01:00"
 description: Warum SynthWave 84 nach Jahren immer noch mein VS Code Theme erster Wahl ist und wie ich als ehemaliger Jetbrains Fan heute komplett in VS Code lebe.
 ---
 

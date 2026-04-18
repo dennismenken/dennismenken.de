@@ -1,5 +1,5 @@
 ---
-date: 2026-04-02
+date: "2026-04-02T08:00:00+02:00"
 description: Warum die aktuelle Flut an Infrastruktur Ausfällen kein Versagen der KI ist, sondern ein klassischer Anwenderfehler im schicken neuen Gewand.
 ---
 

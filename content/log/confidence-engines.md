@@ -1,5 +1,5 @@
 ---
-date: 2026-04-14
+date: "2026-04-14T08:00:00+02:00"
 description: Warum Large Language Models uns permanent schmeicheln und wie dieser Confidence Engine Effekt den Dunning Kruger Effekt in der IT befeuert.
 ---
 

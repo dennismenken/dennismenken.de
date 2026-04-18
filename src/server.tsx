@@ -137,7 +137,7 @@ app.get("/log/:slug", async (c) => {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
-    datePublished: post.date,
+    datePublished: post.datetime,
     author: {
       "@type": "Person",
       name: "Dennis Menken",

@@ -1,5 +1,5 @@
 ---
-date: 2026-04-18
+date: "2026-04-18T15:26:00+02:00"
 description: Ehrliche Erfahrung mit BOSCH Smart Home im Dauertest. Warum das Heizkörper Thermostat II reihenweise ausfällt und mich 2000 EUR kostet.
 ---
 
