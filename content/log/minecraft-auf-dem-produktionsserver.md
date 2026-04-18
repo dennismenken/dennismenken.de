@@ -1,5 +1,6 @@
 ---
 date: 2026-04-02
+description: Warum die aktuelle Flut an Infrastruktur Ausfällen kein Versagen der KI ist, sondern ein klassischer Anwenderfehler im schicken neuen Gewand.
 ---
 
 # Minecraft auf dem Produktionsserver: Warum KI nicht das Internet zerstört

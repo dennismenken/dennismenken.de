@@ -1,5 +1,6 @@
 ---
 date: 2026-03-02
+description: Warum mich Vibe Coding nicht in Panik versetzt und weshalb ich mich noch nie als reinen Softwareentwickler verstanden habe, sondern als Problemlöser.
 ---
 
 # Jenseits von Vibe Coding: Warum ich kein Softwareentwickler bin

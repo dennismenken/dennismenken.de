@@ -1,5 +1,6 @@
 ---
 date: 2026-04-14
+description: Warum Large Language Models uns permanent schmeicheln und wie dieser Confidence Engine Effekt den Dunning Kruger Effekt in der IT befeuert.
 ---
 
 # Confidence Engines: Wenn Prompts zur Architektur verklärt werden

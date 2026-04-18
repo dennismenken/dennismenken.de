@@ -1,5 +1,6 @@
 ---
 date: 2026-03-03
+description: Wie mein Mobilfunkanbieter in 42 Minuten mein Kundenkonto zerlegt und welche architektonischen Lektionen dieses Systemversagen offenbart.
 ---
 
 # Systemversagen im Kundenservice: Wenn schlechte Prozesse teurer sind als gute Architektur

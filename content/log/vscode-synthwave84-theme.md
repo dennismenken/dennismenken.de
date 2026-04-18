@@ -1,5 +1,6 @@
 ---
 date: 2026-03-12
+description: Warum SynthWave 84 nach Jahren immer noch mein VS Code Theme erster Wahl ist und wie ich als ehemaliger Jetbrains Fan heute komplett in VS Code lebe.
 ---
 
 # Leichtgewichtiges Setup und die Rückkehr zu SynthWave '84
