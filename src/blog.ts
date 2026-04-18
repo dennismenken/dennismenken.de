@@ -14,7 +14,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   date: string;
-  description: string;
+  description?: string;
   html: string;
 }
 
@@ -33,21 +33,28 @@ async function parsePost(slug: string, content: string): Promise<BlogPost> {
   const titleMatch = markdown.match(/^#\s+(.+)$/m);
   const title = titleMatch ? titleMatch[1] : slug;
 
-  // Extract description from first paragraph
-  const lines = markdown.split("\n");
-  let description = "";
-  let inParagraph = false;
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (trimmed.startsWith("#") || trimmed === "") {
-      if (inParagraph) break;
-      continue;
+  let description = typeof data.description === "string" ? data.description.trim() : "";
+
+  if (!description) {
+    if (isDev) {
+      console.warn(
+        `[blog] ${slug}: missing frontmatter description, falling back to first paragraph`,
+      );
     }
-    if (trimmed.startsWith("---")) continue;
-    inParagraph = true;
-    description += (description ? " " : "") + trimmed;
+    const lines = markdown.split("\n");
+    let inParagraph = false;
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (trimmed.startsWith("#") || trimmed === "") {
+        if (inParagraph) break;
+        continue;
+      }
+      if (trimmed.startsWith("---")) continue;
+      inParagraph = true;
+      description += (description ? " " : "") + trimmed;
+    }
+    description = description.slice(0, 160);
   }
-  description = description.slice(0, 160);
 
   return {
     slug,

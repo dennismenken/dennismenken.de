@@ -21,7 +21,7 @@ export function generateFeed(posts: BlogPost[]): string {
     <link href="${SITE_URL}/log/${post.slug}" rel="alternate" />
     <id>${SITE_URL}/log/${post.slug}</id>
     <updated>${post.date}T00:00:00Z</updated>
-    <summary>${escapeXml(post.description)}</summary>
+    <summary>${escapeXml(post.description ?? "")}</summary>
     <content type="html">${escapeXml(post.html)}</content>
   </entry>`,
     )
