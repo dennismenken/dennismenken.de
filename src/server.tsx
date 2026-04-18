@@ -105,10 +105,10 @@ app.get("/sitemap.xml", async (c) => {
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
   xml += `  <url>\n    <loc>${base}/</loc>\n  </url>\n`;
-  xml += `  <url>\n    <loc>${base}/log</loc>\n${posts[0] ? `    <lastmod>${posts[0].date}</lastmod>\n` : ""}  </url>\n`;
+  xml += `  <url>\n    <loc>${base}/log</loc>\n${posts[0] ? `    <lastmod>${posts[0].datetime}</lastmod>\n` : ""}  </url>\n`;
 
   for (const post of posts) {
-    xml += `  <url>\n    <loc>${base}/log/${post.slug}</loc>\n    <lastmod>${post.date}</lastmod>\n  </url>\n`;
+    xml += `  <url>\n    <loc>${base}/log/${post.slug}</loc>\n    <lastmod>${post.datetime}</lastmod>\n  </url>\n`;
   }
 
   xml += `</urlset>`;

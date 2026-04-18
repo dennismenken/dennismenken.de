@@ -57,6 +57,12 @@ async function parsePost(slug: string, content: string): Promise<BlogPost> {
     description = description.slice(0, 160);
   }
 
+  if (isDev && data.date instanceof Date) {
+    console.warn(
+      `[blog] ${slug}: date parsed as YAML timestamp, local timezone lost. Quote the value like date: "2026-04-18T08:00:00+02:00"`,
+    );
+  }
+
   const rawDate =
     data.date instanceof Date ? data.date.toISOString() : data.date ? String(data.date) : "";
   const datetime = rawDate.includes("T") ? rawDate : rawDate ? `${rawDate}T00:00:00Z` : "";
