@@ -1,0 +1,18 @@
+---
+date: "2026-09-01T18:00:00+02:00"
+description: "KI Erschöpfung im Arbeitsalltag. Warum autonome Agenten belasten und ständiger Kontextwechsel jeden Solutions Architect massiv auslaugt."
+---
+
+# Die Illusion der Zeitersparnis: Alltag im KI Kindergarten
+
+Ich arbeite aktuell gut fünfzig bis sechzig Stunden pro Woche. Die künstliche Intelligenz sollte unser Leben eigentlich erleichtern und komplexe Prozesse beschleunigen. Das tut sie auch zuverlässig. Das Resultat ist jedoch keineswegs mehr Freizeit. Alles ist einfach nur noch schneller und dichter geworden. Anstatt auf die Fertigstellung einer Aufgabe zu warten, befehlige ich pausenlos immer neue Agenten. Mein Arbeitsalltag fühlt sich zunehmend an, als würde ich einen Kindergarten beaufsichtigen, dessen Kinder mittlerweile ihre eigenen Kindergärten leiten. Das ist extrem ermüdend.
+
+Die Delegation von Aufgaben bedeutet leider nicht, dass man die Verantwortung abgibt. Ein anschauliches Beispiel ist ein aktuelles Projekt. Die Mediathek eines bekannten Content Management Systems sollte mit Alttexten angereichert werden. Ein Vision Modell sollte die Bilder analysieren und die Texte eintragen. Um Ressourcen zu schonen, übergab ich gezielt nur die URLs der tatsächlich verwendeten Bilder. Die Bilder hatten einen simplen Hash im Dateinamen. Das Modell scheiterte an der Mustererkennung.
+
+Die eigentliche Falle ist hierbei der Kompromiss. Es ist nicht zwingend so, dass ich der Maschine jeden Gedanken vorab exakt vortrichtern muss. Die wirkliche Ersparnis erreiche ich aber nur, wenn ich entweder alle Parameter mühselig selbst ermittle und präzise vorgebe. Die Alternative ist, erst einmal Token und Rechenzeit für eine tiefgehende Analyse und kritische Betrachtung durch die Maschine zu verbrauchen. Das kostet wieder enorm viel Zeit für den Task. Ich schaue der KI dann zwar nicht beim Arbeiten zu, aber ich muss wieder einen separaten kleinen Kindergarten aus zwei oder drei Prozessen beobachten. Ich warte passiv auf deren Meldung, ob Handlungsbedarf besteht oder endlich ein finales Signal erscheint. Genau dieses ständige Koordinieren und Warten auf Signale saugt mich am Ende des Tages komplett aus.
+
+Bei zehn bis fünfzehn parallelen Projekten am Tag schlägt der Kontextwechsel unbarmherzig zu. Komplexe Workflows laufen teilweise zwei bis drei Tage völlig autonom im Hintergrund. In der Zwischenzeit widme ich mich anderen Baustellen. Wenn der Agent dann Zwischenergebnisse liefert oder Rückfragen stellt, muss ich mich mühsam wieder in den exakten Kontext der Ursprungsaufgabe eindenken. Diese asynchrone Arbeitsweise fragmentiert den Fokus komplett. Alles verzögert sich gefühlt, obwohl die Einzelteile rasend schnell bearbeitet werden.
+
+Erschwerend kommt die Arbeitsumgebung hinzu. In unserem virtuellen Remote Office gibt es ständige Hintergrundgeräusche durch Meetings. Meine eigene Push to Talk Diktier App funktioniert zwar überragend, aber mein Gehirn kann die Nebengeräusche der sprechenden Kollegen nicht ausblenden. Mein Kollege und ich haben bereits mächtige Werkzeuge gebaut. Wir nutzen ein Second Brain für Agenten und eine riesige Multi Agent Ansicht im CLI Cockpit zur Überwachung aller Prozesse. Die technischen Werkzeuge sind vorhanden. Das kognitive Problem lösen sie bisher jedoch nicht.
+
+Als Solutions Architect muss man auch einmal eingestehen können, dass man gerade keine passende Lösung parat hat. Ich stecke tief in dieser mentalen Schwachstelle. Es ist vermutlich ein notwendiger Schmerz und Teil der eigenen Weiterentwicklung in dieser neuen Epoche der Technologie. Ich werde mich jetzt intensiv mit diesem Architekturproblem meiner eigenen Arbeitsweise befassen. Spätestens am Wochenende wird es einen neuen Bauplan geben.
