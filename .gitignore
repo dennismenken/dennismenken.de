@@ -3,3 +3,9 @@ dist/
 *.log
 .DS_Store
 compose.override.yaml
+
+# Lokale Agenten- und Editor-Konfiguration (maschinenspezifisch)
+.vord/
+.claude/settings.local.json
+.codex/
+.kimi-code/
