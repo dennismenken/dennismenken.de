@@ -67,6 +67,7 @@ Hier beginnt der Text...
 - **Titel**: Erste H1-Überschrift
 - **Datum**: Frontmatter `date` als ISO 8601 mit Zeitzone, zwingend in Anführungszeichen. Ohne Quotes parst YAML den Wert als Timestamp und die lokale Zeitzone geht verloren.
 - **Beschreibung**: Frontmatter `description`. Fehlt sie, wird der erste Absatz auf 160 Zeichen gekürzt.
+- **Externe Links**: Bekommen automatisch `rel="noopener"`. Affiliate- und Empfehlungslinks zusätzlich `rel="sponsored nofollow"` — dafür muss der Host in `SPONSORED_HOSTS` in `src/blog.ts` eingetragen sein. Google wertet einen unmarkierten provisionierten Link als Linkkauf und kann die Domain dafür abstrafen. Der Werbecharakter muss davon unabhängig im Text selbst erkennbar sein (UWG).
 
 ## Lizenz
 

@@ -1,6 +1,7 @@
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 import matter from "gray-matter";
+import type { Nodes, Root } from "hast";
 import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
 import remarkParse from "remark-parse";
@@ -9,6 +10,10 @@ import { unified } from "unified";
 
 const CONTENT_DIR = join(process.cwd(), "content", "log");
 const isDev = process.env.NODE_ENV !== "production";
+
+// Hosts behind referral or affiliate links. Google's link spam policy requires these to be
+// marked rel="sponsored"; an unmarked paid link can trigger a manual action on the domain.
+const SPONSORED_HOSTS = new Set(["kwk.smartsteuer.de"]);
 
 export interface BlogPost {
   slug: string;
@@ -19,10 +24,40 @@ export interface BlogPost {
   html: string;
 }
 
+// Add rel attributes to outbound links: sponsored hosts get the paid-link markers, every
+// other external link gets noopener.
+function rehypeOutboundLinks() {
+  return (tree: Root): Root => {
+    const walk = (node: Nodes) => {
+      if (node.type === "element" && node.tagName === "a") {
+        const href = node.properties.href;
+        if (typeof href === "string" && /^https?:\/\//i.test(href)) {
+          let hostname = "";
+          try {
+            hostname = new URL(href).hostname;
+          } catch {
+            hostname = "";
+          }
+          node.properties.rel = SPONSORED_HOSTS.has(hostname)
+            ? ["sponsored", "nofollow", "noopener"]
+            : ["noopener"];
+        }
+      }
+      if ("children" in node) {
+        for (const child of node.children) walk(child);
+      }
+    };
+
+    walk(tree);
+    return tree;
+  };
+}
+
 const processor = unified()
   .use(remarkParse)
   .use(remarkRehype)
   .use(rehypeHighlight)
+  .use(rehypeOutboundLinks)
   .use(rehypeStringify);
 
 async function parsePost(slug: string, content: string): Promise<BlogPost> {
